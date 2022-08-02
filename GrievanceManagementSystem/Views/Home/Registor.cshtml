@@ -1,0 +1,72 @@
+﻿@using GrievanceManagementSystem.ViewModels
+@model RegistrationViewModel
+@{
+    Layout = "~/Views/Shared/_LoginPageLayout.cshtml";
+}
+<div class="col-lg-7">
+    <div class="card shadow-lg border-0 rounded-lg mt-5">
+        <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Account</h3></div>
+        <div class="card-body">
+            @using (Html.BeginForm("Registor", "Home", FormMethod.Post))
+            {
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3 mb-md-0">
+                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "Enter your first name", @maxLength = "50" })
+                            <label for="FirstName">First Name</label>
+                            @Html.ValidationMessageFor(m => m.FirstName, null, new { @class = "validation-error" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Enter your last name", @maxLength = "50" })
+                            <label for="LastName">Last Name</label>
+                            @Html.ValidationMessageFor(m => m.LastName)
+                        </div>
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control", @placeholder = "name@example.com" })
+                    <label for="EmailAddress">Email Address</label>
+                    @Html.ValidationMessageFor(m => m.EmailAddress, null, new { @class = "validation-error" })
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3 mb-md-0">
+                            <input class="form-control" id="inputPassword" type="password" placeholder="Create a password" />
+                            <label for="inputPassword">Password</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3 mb-md-0">
+                            <input class="form-control" id="inputPasswordConfirm" type="password" placeholder="Confirm password" />
+                            <label for="inputPasswordConfirm">Confirm Password</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3 mb-md-0">
+                            @Html.TextBoxFor(m => m.ContactNumber, new { @class = "form-control", @placeholder = "Enter your contact number" })
+                            <label for="ContactNumber">Contact Number</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            @Html.TextBoxFor(m => m.EnrollmentNumber, new { @class = "form-control", @placeholder = "Enter your enrollment number" })
+                            <label for="ContactNumber">Enrollment Number</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 mb-0">
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-block" id="user-register" data-test-selector="btnSubmitAccount">Create Account</button>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="card-footer text-center py-3">
+            <div class="small"><a href="/home/login">Have an account? Go to login</a></div>
+        </div>
+    </div>
+</div>
