@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserBusinessLogic.cs" />
+    <Compile Include="GrievanceUserDetailsBusinessLogic.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAcessLayer\GMS.DataAcessLayer.csproj">

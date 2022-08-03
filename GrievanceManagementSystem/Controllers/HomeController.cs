@@ -34,8 +34,7 @@ namespace GrievanceManagementSystem.Controllers
                     EmailAddress = registrationViewModel.EmailAddress
                 };
 
-                UserBusinessLogic userBusinessLogic = new UserBusinessLogic();
-                bool status = userBusinessLogic.UserRegistration(model);
+                bool status = new GrievanceUserDetailsBusinessLogic().UserRegistration(model);
             }
             return View(registrationViewModel);
         }

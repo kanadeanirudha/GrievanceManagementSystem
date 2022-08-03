@@ -92,6 +92,7 @@
     <Compile Include="Data\GrievanceUserDetail.cs">
       <DependentUpon>GrievanceManagementSystemEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="GrievanceUserDetailsDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +122,12 @@
       <DependentUpon>GrievanceManagementSystemEntity.edmx</DependentUpon>
       <LastGenOutput>GrievanceManagementSystemEntity.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GMSModel\GMS.Model.csproj">
+      <Project>{95758423-ecbb-4776-88af-ad36d1c5e065}</Project>
+      <Name>GMS.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
