@@ -40,6 +40,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,14 +50,77 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\GrievanceDepartmentMaster.cs">
+      <DependentUpon>GrievanceManagementSystemEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\GrievanceDetail.cs">
+      <DependentUpon>GrievanceManagementSystemEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\GrievanceManagementSystemEntity.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GrievanceManagementSystemEntity.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\GrievanceManagementSystemEntity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GrievanceManagementSystemEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\GrievanceManagementSystemEntity.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GrievanceManagementSystemEntity.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Data\GrievanceMaster.cs">
+      <DependentUpon>GrievanceManagementSystemEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\GrievancePriorityMaster.cs">
+      <DependentUpon>GrievanceManagementSystemEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\GrievanceRoleMaster.cs">
+      <DependentUpon>GrievanceManagementSystemEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\GrievanceSendToMaster.cs">
+      <DependentUpon>GrievanceManagementSystemEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\GrievanceStatusMaster.cs">
+      <DependentUpon>GrievanceManagementSystemEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\GrievanceTypeMaster.cs">
+      <DependentUpon>GrievanceManagementSystemEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\GrievanceUserDetail.cs">
+      <DependentUpon>GrievanceManagementSystemEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="Data\GrievanceManagementSystemEntity.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>GrievanceManagementSystemEntity.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Data\GrievanceManagementSystemEntity.edmx.diagram">
+      <DependentUpon>GrievanceManagementSystemEntity.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\GrievanceManagementSystemEntity.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GrievanceManagementSystemEntity.edmx</DependentUpon>
+      <LastGenOutput>GrievanceManagementSystemEntity.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\GrievanceManagementSystemEntity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GrievanceManagementSystemEntity.edmx</DependentUpon>
+      <LastGenOutput>GrievanceManagementSystemEntity.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
