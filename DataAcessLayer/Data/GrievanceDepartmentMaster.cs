@@ -18,7 +18,7 @@ namespace GMS.DataAcessLayer.Data
         public GrievanceDepartmentMaster()
         {
             this.GrievanceRoleMasters = new HashSet<GrievanceRoleMaster>();
-            this.GrievanceUserDetails = new HashSet<GrievanceUserDetail>();
+            this.GrievanceMasters = new HashSet<GrievanceMaster>();
         }
     
         public short DepartmentId { get; set; }
@@ -33,6 +33,6 @@ namespace GMS.DataAcessLayer.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GrievanceRoleMaster> GrievanceRoleMasters { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GrievanceUserDetail> GrievanceUserDetails { get; set; }
+        public virtual ICollection<GrievanceMaster> GrievanceMasters { get; set; }
     }
 }
