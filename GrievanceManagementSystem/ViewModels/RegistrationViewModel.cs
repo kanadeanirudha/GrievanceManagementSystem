@@ -21,7 +21,7 @@ namespace GrievanceManagementSystem.ViewModels
         public string ReTypePassword { get; set; }
 
         [Required(ErrorMessage = "First Name is required.")]
-        [MaxLength(50, ErrorMessage = "Email Address can not exceed 50 characters.")]
+        [MaxLength(50, ErrorMessage = "First Name can not exceed 50 characters.")]
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
