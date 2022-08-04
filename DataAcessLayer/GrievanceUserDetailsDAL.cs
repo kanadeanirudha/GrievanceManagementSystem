@@ -40,5 +40,29 @@ namespace GMS.DataAcessLayer
             }
             return status;
         }
+
+        public bool Login(RegistrationModel model)
+        {
+            bool status = false;
+            try
+            {
+                if (model != null)
+                {
+                    using (db = new GrievanceManagementSystemEntities())
+                    {
+                        GrievanceUserDetail userDetail = db.GrievanceUserDetails?.FirstOrDefault(x => x.Email == model.EmailAddress && x.Password == model.Password);
+                        if (!string.Equals(userDetail, null))
+                        {
+                            status = true;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                status = false;
+            }
+            return status;
+        }
     }
 }

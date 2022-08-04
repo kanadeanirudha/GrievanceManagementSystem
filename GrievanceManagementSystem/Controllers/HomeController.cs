@@ -1,5 +1,6 @@
 ﻿using GMS.BusinessLogicLayer;
 using GMS.Model;
+using GrievanceManagementSystem.Helper;
 using GrievanceManagementSystem.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -11,8 +12,20 @@ namespace GrievanceManagementSystem.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpGet]
         public ActionResult Login()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(RegistrationViewModel registrationViewModel)
+        {
+            if (!string.IsNullOrEmpty(registrationViewModel.EmailAddress) && !string.IsNullOrEmpty(registrationViewModel.Password))
+            {
+                RegistrationModel model = registrationViewModel.ToModel<RegistrationModel>();
+                bool status = new GrievanceUserDetailsBusinessLogic().Login(model);
+            }
             return View();
         }
 
@@ -38,7 +51,7 @@ namespace GrievanceManagementSystem.Controllers
             }
             return View(registrationViewModel);
         }
-       
+
         public ActionResult ForgotPassword()
         {
             return View();

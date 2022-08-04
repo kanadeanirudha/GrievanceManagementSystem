@@ -6,7 +6,7 @@ using System.Web;
 
 namespace GrievanceManagementSystem.ViewModels
 {
-    public class RegistrationViewModel
+    public class RegistrationViewModel: BaseViewModel
     {
         [Required(ErrorMessage = "Email Address is required.")]
         [EmailAddress(ErrorMessage = "Please enter a valid email address.")]
