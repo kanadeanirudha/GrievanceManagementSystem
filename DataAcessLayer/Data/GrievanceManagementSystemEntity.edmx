@@ -61,19 +61,6 @@
           <Property Name="ModifiedBy" Type="int" />
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
-        <EntityType Name="GrievanceRoleMaster">
-          <Key>
-            <PropertyRef Name="RoleId" />
-          </Key>
-          <Property Name="RoleId" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="RoleCode" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="DepartmentId" Type="smallint" />
-          <Property Name="CreatedBy" Type="int" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="ModifiedBy" Type="int" />
-          <Property Name="ModifiedDate" Type="datetime" />
-        </EntityType>
         <EntityType Name="GrievanceSendToMaster">
           <Key>
             <PropertyRef Name="GrievanceSendToId" />
@@ -124,7 +111,7 @@
           <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="EnrollmentNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ContactNo" Type="varchar" MaxLength="20" />
-          <Property Name="RoleId" Type="smallint" Nullable="false" />
+          <Property Name="EntityType" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="ModifiedBy" Type="int" Nullable="false" />
@@ -190,36 +177,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_GrievanceRoleMaster_GrievanceDepartmentMaster">
-          <End Role="GrievanceDepartmentMaster" Type="Self.GrievanceDepartmentMaster" Multiplicity="0..1" />
-          <End Role="GrievanceRoleMaster" Type="Self.GrievanceRoleMaster" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GrievanceDepartmentMaster">
-              <PropertyRef Name="DepartmentId" />
-            </Principal>
-            <Dependent Role="GrievanceRoleMaster">
-              <PropertyRef Name="DepartmentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_GrievanceUserDetails_GrievanceRoleMaster">
-          <End Role="GrievanceRoleMaster" Type="Self.GrievanceRoleMaster" Multiplicity="1" />
-          <End Role="GrievanceUserDetails" Type="Self.GrievanceUserDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GrievanceRoleMaster">
-              <PropertyRef Name="RoleId" />
-            </Principal>
-            <Dependent Role="GrievanceUserDetails">
-              <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="GrievanceManagementSystemModelStoreContainer">
           <EntitySet Name="GrievanceDepartmentMaster" EntityType="Self.GrievanceDepartmentMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GrievanceDetails" EntityType="Self.GrievanceDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GrievanceMaster" EntityType="Self.GrievanceMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GrievancePriorityMaster" EntityType="Self.GrievancePriorityMaster" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="GrievanceRoleMaster" EntityType="Self.GrievanceRoleMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GrievanceSendToMaster" EntityType="Self.GrievanceSendToMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GrievanceStatusMaster" EntityType="Self.GrievanceStatusMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GrievanceTypeMaster" EntityType="Self.GrievanceTypeMaster" Schema="dbo" store:Type="Tables" />
@@ -244,14 +206,6 @@
             <End Role="GrievanceUserDetails" EntitySet="GrievanceUserDetails" />
             <End Role="GrievanceMaster" EntitySet="GrievanceMaster" />
           </AssociationSet>
-          <AssociationSet Name="FK_GrievanceRoleMaster_GrievanceDepartmentMaster" Association="Self.FK_GrievanceRoleMaster_GrievanceDepartmentMaster">
-            <End Role="GrievanceDepartmentMaster" EntitySet="GrievanceDepartmentMaster" />
-            <End Role="GrievanceRoleMaster" EntitySet="GrievanceRoleMaster" />
-          </AssociationSet>
-          <AssociationSet Name="FK_GrievanceUserDetails_GrievanceRoleMaster" Association="Self.FK_GrievanceUserDetails_GrievanceRoleMaster">
-            <End Role="GrievanceRoleMaster" EntitySet="GrievanceRoleMaster" />
-            <End Role="GrievanceUserDetails" EntitySet="GrievanceUserDetails" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -269,7 +223,6 @@
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedBy" Type="Int32" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="GrievanceRoleMasters" Relationship="Self.FK_GrievanceRoleMaster_GrievanceDepartmentMaster" FromRole="GrievanceDepartmentMaster" ToRole="GrievanceRoleMaster" />
           <NavigationProperty Name="GrievanceMasters" Relationship="GrievanceManagementSystemModel.FK_GrievanceMaster_GrievanceDepartmentMaster" FromRole="GrievanceDepartmentMaster" ToRole="GrievanceMaster" />
         </EntityType>
         <EntityType Name="GrievanceDetail">
@@ -298,21 +251,6 @@
           <Property Name="ModifiedBy" Type="Int32" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="GrievanceMasters" Relationship="GrievanceManagementSystemModel.FK_GrievanceMaster_GrievancePriorityMaster" FromRole="GrievancePriorityMaster" ToRole="GrievanceMaster" />
-        </EntityType>
-        <EntityType Name="GrievanceRoleMaster">
-          <Key>
-            <PropertyRef Name="RoleId" />
-          </Key>
-          <Property Name="RoleId" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="RoleCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DepartmentId" Type="Int16" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ModifiedBy" Type="Int32" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="GrievanceDepartmentMaster" Relationship="Self.FK_GrievanceRoleMaster_GrievanceDepartmentMaster" FromRole="GrievanceRoleMaster" ToRole="GrievanceDepartmentMaster" />
-          <NavigationProperty Name="GrievanceUserDetails" Relationship="GrievanceManagementSystemModel.FK_GrievanceUserDetails_GrievanceRoleMaster" FromRole="GrievanceRoleMaster" ToRole="GrievanceUserDetail" />
         </EntityType>
         <EntityType Name="GrievanceSendToMaster">
           <Key>
@@ -354,32 +292,14 @@
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="GrievanceMasters" Relationship="GrievanceManagementSystemModel.FK_GrievanceMaster_GrievanceTypeMaster" FromRole="GrievanceTypeMaster" ToRole="GrievanceMaster" />
         </EntityType>
-        <Association Name="FK_GrievanceRoleMaster_GrievanceDepartmentMaster">
-          <End Role="GrievanceDepartmentMaster" Type="Self.GrievanceDepartmentMaster" Multiplicity="0..1" />
-          <End Role="GrievanceRoleMaster" Type="Self.GrievanceRoleMaster" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GrievanceDepartmentMaster">
-              <PropertyRef Name="DepartmentId" />
-            </Principal>
-            <Dependent Role="GrievanceRoleMaster">
-              <PropertyRef Name="DepartmentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="GrievanceManagementSystemEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="GrievanceDepartmentMasters" EntityType="Self.GrievanceDepartmentMaster" />
           <EntitySet Name="GrievanceDetails" EntityType="Self.GrievanceDetail" />
           <EntitySet Name="GrievancePriorityMasters" EntityType="Self.GrievancePriorityMaster" />
-          <EntitySet Name="GrievanceRoleMasters" EntityType="Self.GrievanceRoleMaster" />
           <EntitySet Name="GrievanceSendToMasters" EntityType="Self.GrievanceSendToMaster" />
           <EntitySet Name="GrievanceStatusMasters" EntityType="Self.GrievanceStatusMaster" />
           <EntitySet Name="GrievanceTypeMasters" EntityType="Self.GrievanceTypeMaster" />
-          <AssociationSet Name="FK_GrievanceRoleMaster_GrievanceDepartmentMaster" Association="Self.FK_GrievanceRoleMaster_GrievanceDepartmentMaster">
-            <End Role="GrievanceDepartmentMaster" EntitySet="GrievanceDepartmentMasters" />
-            <End Role="GrievanceRoleMaster" EntitySet="GrievanceRoleMasters" />
-          </AssociationSet>
           <EntitySet Name="GrievanceMasters" EntityType="GrievanceManagementSystemModel.GrievanceMaster" />
-          <EntitySet Name="GrievanceUserDetails" EntityType="GrievanceManagementSystemModel.GrievanceUserDetail" />
           <AssociationSet Name="FK_GrievanceMaster_GrievanceDepartmentMaster" Association="GrievanceManagementSystemModel.FK_GrievanceMaster_GrievanceDepartmentMaster">
             <End Role="GrievanceDepartmentMaster" EntitySet="GrievanceDepartmentMasters" />
             <End Role="GrievanceMaster" EntitySet="GrievanceMasters" />
@@ -396,13 +316,10 @@
             <End Role="GrievanceTypeMaster" EntitySet="GrievanceTypeMasters" />
             <End Role="GrievanceMaster" EntitySet="GrievanceMasters" />
           </AssociationSet>
+          <EntitySet Name="GrievanceUserDetails" EntityType="GrievanceManagementSystemModel.GrievanceUserDetail" />
           <AssociationSet Name="FK_GrievanceMaster_GrievanceUserDetails" Association="GrievanceManagementSystemModel.FK_GrievanceMaster_GrievanceUserDetails">
             <End Role="GrievanceUserDetail" EntitySet="GrievanceUserDetails" />
             <End Role="GrievanceMaster" EntitySet="GrievanceMasters" />
-          </AssociationSet>
-          <AssociationSet Name="FK_GrievanceUserDetails_GrievanceRoleMaster" Association="GrievanceManagementSystemModel.FK_GrievanceUserDetails_GrievanceRoleMaster">
-            <End Role="GrievanceRoleMaster" EntitySet="GrievanceRoleMasters" />
-            <End Role="GrievanceUserDetail" EntitySet="GrievanceUserDetails" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="GrievanceMaster">
@@ -427,25 +344,6 @@
           <NavigationProperty Name="GrievancePriorityMaster" Relationship="GrievanceManagementSystemModel.FK_GrievanceMaster_GrievancePriorityMaster" FromRole="GrievanceMaster" ToRole="GrievancePriorityMaster" />
           <NavigationProperty Name="GrievanceTypeMaster" Relationship="GrievanceManagementSystemModel.FK_GrievanceMaster_GrievanceTypeMaster" FromRole="GrievanceMaster" ToRole="GrievanceTypeMaster" />
           <NavigationProperty Name="GrievanceUserDetail" Relationship="GrievanceManagementSystemModel.FK_GrievanceMaster_GrievanceUserDetails" FromRole="GrievanceMaster" ToRole="GrievanceUserDetail" />
-        </EntityType>
-        <EntityType Name="GrievanceUserDetail">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="EnrollmentNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ContactNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="RoleId" Type="Int16" Nullable="false" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
-          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="GrievanceMasters" Relationship="GrievanceManagementSystemModel.FK_GrievanceMaster_GrievanceUserDetails" FromRole="GrievanceUserDetail" ToRole="GrievanceMaster" />
-          <NavigationProperty Name="GrievanceRoleMaster" Relationship="GrievanceManagementSystemModel.FK_GrievanceUserDetails_GrievanceRoleMaster" FromRole="GrievanceUserDetail" ToRole="GrievanceRoleMaster" />
         </EntityType>
         <Association Name="FK_GrievanceMaster_GrievanceDepartmentMaster">
           <End Type="GrievanceManagementSystemModel.GrievanceDepartmentMaster" Role="GrievanceDepartmentMaster" Multiplicity="1" />
@@ -495,6 +393,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="GrievanceUserDetail">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EnrollmentNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EntityType" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="GrievanceMasters" Relationship="GrievanceManagementSystemModel.FK_GrievanceMaster_GrievanceUserDetails" FromRole="GrievanceUserDetail" ToRole="GrievanceMaster" />
+        </EntityType>
         <Association Name="FK_GrievanceMaster_GrievanceUserDetails">
           <End Type="GrievanceManagementSystemModel.GrievanceUserDetail" Role="GrievanceUserDetail" Multiplicity="1" />
           <End Type="GrievanceManagementSystemModel.GrievanceMaster" Role="GrievanceMaster" Multiplicity="*" />
@@ -507,19 +423,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_GrievanceUserDetails_GrievanceRoleMaster">
-          <End Type="GrievanceManagementSystemModel.GrievanceRoleMaster" Role="GrievanceRoleMaster" Multiplicity="1" />
-          <End Type="GrievanceManagementSystemModel.GrievanceUserDetail" Role="GrievanceUserDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GrievanceRoleMaster">
-              <PropertyRef Name="RoleId" />
-            </Principal>
-            <Dependent Role="GrievanceUserDetail">
-              <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -559,20 +463,6 @@
                 <ScalarProperty Name="PriorityName" ColumnName="PriorityName" />
                 <ScalarProperty Name="PriorityCode" ColumnName="PriorityCode" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="GrievanceRoleMasters">
-            <EntityTypeMapping TypeName="GrievanceManagementSystemModel.GrievanceRoleMaster">
-              <MappingFragment StoreEntitySet="GrievanceRoleMaster">
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-                <ScalarProperty Name="RoleCode" ColumnName="RoleCode" />
-                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
@@ -648,7 +538,7 @@
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="EntityType" ColumnName="EntityType" />
                 <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
                 <ScalarProperty Name="EnrollmentNumber" ColumnName="EnrollmentNumber" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />

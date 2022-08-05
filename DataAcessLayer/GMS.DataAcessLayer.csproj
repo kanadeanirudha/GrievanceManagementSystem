@@ -77,9 +77,6 @@
     <Compile Include="Data\GrievancePriorityMaster.cs">
       <DependentUpon>GrievanceManagementSystemEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\GrievanceRoleMaster.cs">
-      <DependentUpon>GrievanceManagementSystemEntity.tt</DependentUpon>
-    </Compile>
     <Compile Include="Data\GrievanceSendToMaster.cs">
       <DependentUpon>GrievanceManagementSystemEntity.tt</DependentUpon>
     </Compile>

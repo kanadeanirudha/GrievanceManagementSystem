@@ -27,7 +27,7 @@ namespace GMS.DataAcessLayer.Data
         public string LastName { get; set; }
         public string EnrollmentNumber { get; set; }
         public string ContactNo { get; set; }
-        public short RoleId { get; set; }
+        public string EntityType { get; set; }
         public int CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public int ModifiedBy { get; set; }
@@ -35,6 +35,5 @@ namespace GMS.DataAcessLayer.Data
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GrievanceMaster> GrievanceMasters { get; set; }
-        public virtual GrievanceRoleMaster GrievanceRoleMaster { get; set; }
     }
 }

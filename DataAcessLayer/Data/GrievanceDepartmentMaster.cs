@@ -17,7 +17,6 @@ namespace GMS.DataAcessLayer.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public GrievanceDepartmentMaster()
         {
-            this.GrievanceRoleMasters = new HashSet<GrievanceRoleMaster>();
             this.GrievanceMasters = new HashSet<GrievanceMaster>();
         }
     
@@ -30,8 +29,6 @@ namespace GMS.DataAcessLayer.Data
         public Nullable<int> ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GrievanceRoleMaster> GrievanceRoleMasters { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GrievanceMaster> GrievanceMasters { get; set; }
     }
