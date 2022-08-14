@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace GrievanceManagementSystem.ViewModels
 {
-    public class RegistrationViewModel: BaseViewModel
+    public class RegistrationViewModel : BaseViewModel
     {
         [Required(ErrorMessage = "Email Address is required.")]
         [EmailAddress(ErrorMessage = "Please enter a valid email address.")]
@@ -31,8 +27,5 @@ namespace GrievanceManagementSystem.ViewModels
 
         [Required]
         public string ContactNumber { get; set; }
-
-        [Required]
-        public int DepartmentID { get; set; }
     }
 }

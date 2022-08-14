@@ -1,15 +1,16 @@
 ﻿using GMS.BusinessLogicLayer;
 using GMS.Model;
+
 using GrievanceManagementSystem.Helper;
 using GrievanceManagementSystem.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+
 using System.Web.Mvc;
+using System.Web.Security;
+using GMS.Model.Constant;
 
 namespace GrievanceManagementSystem.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         [HttpGet]
@@ -19,13 +20,23 @@ namespace GrievanceManagementSystem.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(RegistrationViewModel registrationViewModel)
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(UserLoginViewModel registrationViewModel)
         {
-            if (!string.IsNullOrEmpty(registrationViewModel.EmailAddress) && !string.IsNullOrEmpty(registrationViewModel.Password))
+            if (ModelState.IsValid)
             {
-                RegistrationModel model = registrationViewModel.ToModel<RegistrationModel>();
-                bool status = new GrievanceUserDetailsBusinessLogic().Login(model);
+                if (!string.IsNullOrEmpty(registrationViewModel.EmailAddress) && !string.IsNullOrEmpty(registrationViewModel.Password))
+                {
+                    RegistrationModel model = new GrievanceUserDetailsBusinessLogic().Login(registrationViewModel.EmailAddress, registrationViewModel.Password);
+                    if (!model.HasError)
+                    {
+                        FormsAuthentication.SetAuthCookie(model.EmailAddress, false);
+                        Session[Constant.UserSessionData] = model;
+                        return RedirectToAction("Dashboard", "Dashboard");
+                    }
+                }
             }
+            ModelState.AddModelError("", "invalid Username or Password");
             return View();
         }
 
@@ -57,9 +68,12 @@ namespace GrievanceManagementSystem.Controllers
             return View();
         }
 
-        public ActionResult Dashboard()
+        public ActionResult LogOff()
         {
-            return View();
+            Session.Clear();
+            Session.Abandon();
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login", "Home");
         }
     }
 }

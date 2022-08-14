@@ -41,28 +41,34 @@ namespace GMS.DataAcessLayer
             return status;
         }
 
-        public bool Login(RegistrationModel model)
+        public RegistrationModel Login(string emailAddress, string password)
         {
-            bool status = false;
+            RegistrationModel model = new RegistrationModel();
             try
             {
-                if (model != null)
+                if (!string.IsNullOrEmpty(emailAddress) && !string.IsNullOrEmpty(password))
                 {
                     using (db = new GrievanceManagementSystemEntities())
                     {
-                        GrievanceUserDetail userDetail = db.GrievanceUserDetails?.FirstOrDefault(x => x.Email == model.EmailAddress && x.Password == model.Password);
+                        GrievanceUserDetail userDetail = db.GrievanceUserDetails?.FirstOrDefault(x => x.Email == emailAddress && x.Password == password);
                         if (!string.Equals(userDetail, null))
                         {
-                            status = true;
+                            model = new RegistrationModel()
+                            {
+                                EmailAddress = userDetail.Email,
+                                FirstName = userDetail.FirstName,
+                                LastName = userDetail.LastName,
+                                EntityType = userDetail.EntityType,
+                            };
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                status = false;
+                model.HasError = true;
             }
-            return status;
+            return model; 
         }
     }
 }

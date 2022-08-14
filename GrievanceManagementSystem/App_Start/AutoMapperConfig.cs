@@ -9,6 +9,7 @@ namespace GrievanceManagementSystem
         public static void Execute()
         {
             Mapper.CreateMap<RegistrationModel, RegistrationViewModel>().ReverseMap();
+            Mapper.CreateMap<RegistrationModel, UserLoginViewModel>().ReverseMap();
         }
     }
 }

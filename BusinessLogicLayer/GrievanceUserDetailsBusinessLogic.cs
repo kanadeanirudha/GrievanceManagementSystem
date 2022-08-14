@@ -16,10 +16,10 @@ namespace GMS.BusinessLogicLayer
             return status;
         }
 
-        public bool Login(RegistrationModel model)
+        public RegistrationModel Login(string emailAddress, string password)
         {
-            bool status = new GrievanceUserDetailsDAL().Login(model);
-            return status;
+            RegistrationModel model = new GrievanceUserDetailsDAL().Login(emailAddress, password);
+            return model;
         }
     }
 }
