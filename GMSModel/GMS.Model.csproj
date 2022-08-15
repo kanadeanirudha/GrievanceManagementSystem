@@ -47,6 +47,11 @@
     <Compile Include="Helper\Constant.cs" />
     <Compile Include="Helper\Translator.cs" />
     <Compile Include="Model\BaseModel.cs" />
+    <Compile Include="Model\GrievanceSendToModel.cs" />
+    <Compile Include="Model\GrievanceTypeModel.cs" />
+    <Compile Include="Model\StatusModel.cs" />
+    <Compile Include="Model\PriorityModel.cs" />
+    <Compile Include="Model\DepartmentModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\RegistrationModel.cs" />
   </ItemGroup>

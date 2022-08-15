@@ -141,6 +141,7 @@
     <Compile Include="Helper\TranslatorExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\GrievanceDetailsViewModel.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\UserLoginViewModel.cs" />
   </ItemGroup>
@@ -187,6 +188,7 @@
     <Content Include="Views\Shared\_StudentLayout.cshtml" />
     <Content Include="Views\Student\Dashboard.cshtml" />
     <Content Include="Views\Student\GrievanceList.cshtml" />
+    <Content Include="Views\Student\CreateGrievance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

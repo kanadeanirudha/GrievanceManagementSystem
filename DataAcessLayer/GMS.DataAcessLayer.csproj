@@ -89,6 +89,7 @@
     <Compile Include="Data\GrievanceUserDetail.cs">
       <DependentUpon>GrievanceManagementSystemEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="GrievanceMasterDataDAL.cs" />
     <Compile Include="GrievanceUserDetailsDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
