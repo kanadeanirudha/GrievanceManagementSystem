@@ -19,8 +19,8 @@ namespace GMS.DataAcessLayer.Data
         public string Details { get; set; }
         public int CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
-        public int ModifiedBy { get; set; }
-        public System.DateTime ModifiedDate { get; set; }
+        public Nullable<int> ModifiedBy { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
     
         public virtual GrievanceMaster GrievanceMaster { get; set; }
     }

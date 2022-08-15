@@ -36,11 +36,11 @@ namespace GMS.DataAcessLayer.Data
         public Nullable<System.DateTime> ModifiedDate { get; set; }
     
         public virtual GrievanceDepartmentMaster GrievanceDepartmentMaster { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GrievanceDetail> GrievanceDetails { get; set; }
         public virtual GrievancePriorityMaster GrievancePriorityMaster { get; set; }
         public virtual GrievanceSendToMaster GrievanceSendToMaster { get; set; }
         public virtual GrievanceTypeMaster GrievanceTypeMaster { get; set; }
         public virtual GrievanceUserDetail GrievanceUserDetail { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GrievanceDetail> GrievanceDetails { get; set; }
     }
 }

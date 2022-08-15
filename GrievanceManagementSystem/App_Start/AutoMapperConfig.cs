@@ -10,6 +10,7 @@ namespace GrievanceManagementSystem
         {
             Mapper.CreateMap<UserModel, RegistrationViewModel>().ReverseMap();
             Mapper.CreateMap<UserModel, UserLoginViewModel>().ReverseMap();
+            Mapper.CreateMap<GrievanceDetailsModel, GrievanceDetailsViewModel>().ReverseMap();
         }
     }
 }

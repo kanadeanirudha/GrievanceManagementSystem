@@ -5,15 +5,18 @@ using GMS.BusinessLogicLayer;
 using GMS.Model;
 using GMS.Model.Constant;
 using GrievanceManagementSystem.ViewModels;
+using GrievanceManagementSystem.Helper;
 
 namespace GrievanceManagementSystem.Controllers
 {
     public class StudentController : BaseController
     {
         GrievanceMasterDataBusinessLogic grievanceMasterDataBusinessLogic = null;
+        GrievanceDetailsDataBusinessLogic grievanceDetailsDataBusinessLogic = null;
         public StudentController()
         {
             grievanceMasterDataBusinessLogic = new GrievanceMasterDataBusinessLogic();
+            grievanceDetailsDataBusinessLogic = new GrievanceDetailsDataBusinessLogic();
         }
         public ActionResult Dashboard()
         {
@@ -52,7 +55,7 @@ namespace GrievanceManagementSystem.Controllers
             {
                 if (ModelState.IsValid)
                 {
-
+                    bool status = grievanceDetailsDataBusinessLogic.CreateGrievance(grievanceDetailsViewModel.ToModel<GrievanceDetailsModel>());
                 }
                 BindData(grievanceDetailsViewModel);
                 return View(grievanceDetailsViewModel);
@@ -73,6 +76,7 @@ namespace GrievanceManagementSystem.Controllers
         private GrievanceDetailsViewModel BindData(GrievanceDetailsViewModel grievanceDetailsViewModel)
         {
             UserModel userModel = Session[Constant.UserSessionData] as UserModel;
+            grievanceDetailsViewModel.UserId = userModel.UserId;
             grievanceDetailsViewModel.FullName = userModel.FirstName + " " + userModel.LastName;
             grievanceDetailsViewModel.EmailAddress = userModel.EmailAddress;
             grievanceDetailsViewModel.EnrollmentNumber = userModel.EnrollmentNumber;

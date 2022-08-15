@@ -47,6 +47,7 @@
     <Compile Include="Helper\Constant.cs" />
     <Compile Include="Helper\Translator.cs" />
     <Compile Include="Model\BaseModel.cs" />
+    <Compile Include="Model\GrievanceDetailsModel.cs" />
     <Compile Include="Model\GrievanceSendToModel.cs" />
     <Compile Include="Model\GrievanceTypeModel.cs" />
     <Compile Include="Model\StatusModel.cs" />
