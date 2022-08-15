@@ -14,6 +14,12 @@ namespace GMS.DataAcessLayer.Data
     
     public partial class GrievanceSendToMaster
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public GrievanceSendToMaster()
+        {
+            this.GrievanceMasters = new HashSet<GrievanceMaster>();
+        }
+    
         public short GrievanceSendToId { get; set; }
         public string GrievanceSendToName { get; set; }
         public string GrievanceSendToCode { get; set; }
@@ -22,5 +28,8 @@ namespace GMS.DataAcessLayer.Data
         public System.DateTime CreatedDate { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GrievanceMaster> GrievanceMasters { get; set; }
     }
 }

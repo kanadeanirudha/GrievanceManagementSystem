@@ -28,6 +28,7 @@ namespace GMS.DataAcessLayer.Data
         public string Subject { get; set; }
         public short DepartmentId { get; set; }
         public short PriorityId { get; set; }
+        public short GrievanceSendToId { get; set; }
         public string AddCc { get; set; }
         public int CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
@@ -38,6 +39,7 @@ namespace GMS.DataAcessLayer.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GrievanceDetail> GrievanceDetails { get; set; }
         public virtual GrievancePriorityMaster GrievancePriorityMaster { get; set; }
+        public virtual GrievanceSendToMaster GrievanceSendToMaster { get; set; }
         public virtual GrievanceTypeMaster GrievanceTypeMaster { get; set; }
         public virtual GrievanceUserDetail GrievanceUserDetail { get; set; }
     }

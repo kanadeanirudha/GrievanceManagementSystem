@@ -31,7 +31,7 @@ namespace GMS.DataAcessLayer.Data
         public virtual DbSet<GrievanceSendToMaster> GrievanceSendToMasters { get; set; }
         public virtual DbSet<GrievanceStatusMaster> GrievanceStatusMasters { get; set; }
         public virtual DbSet<GrievanceTypeMaster> GrievanceTypeMasters { get; set; }
-        public virtual DbSet<GrievanceMaster> GrievanceMasters { get; set; }
         public virtual DbSet<GrievanceUserDetail> GrievanceUserDetails { get; set; }
+        public virtual DbSet<GrievanceMaster> GrievanceMasters { get; set; }
     }
 }

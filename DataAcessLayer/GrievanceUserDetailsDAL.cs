@@ -15,7 +15,7 @@ namespace GMS.DataAcessLayer
         {
         }
 
-        public bool UserRegistration(RegistrationModel model)
+        public bool UserRegistration(UserModel model)
         {
             bool status = false;
             try
@@ -41,9 +41,9 @@ namespace GMS.DataAcessLayer
             return status;
         }
 
-        public RegistrationModel Login(string emailAddress, string password)
+        public UserModel Login(string emailAddress, string password)
         {
-            RegistrationModel model = new RegistrationModel();
+            UserModel model = new UserModel();
             try
             {
                 if (!string.IsNullOrEmpty(emailAddress) && !string.IsNullOrEmpty(password))
@@ -51,16 +51,7 @@ namespace GMS.DataAcessLayer
                     using (db = new GrievanceManagementSystemEntities())
                     {
                         GrievanceUserDetail userDetail = db.GrievanceUserDetails?.FirstOrDefault(x => x.Email == emailAddress && x.Password == password);
-                        if (!string.Equals(userDetail, null))
-                        {
-                            model = new RegistrationModel()
-                            {
-                                EmailAddress = userDetail.Email,
-                                FirstName = userDetail.FirstName,
-                                LastName = userDetail.LastName,
-                                EntityType = userDetail.EntityType,
-                            };
-                        }
+                        model = BindUserData(model, userDetail);
                     }
                 }
             }
@@ -68,7 +59,27 @@ namespace GMS.DataAcessLayer
             {
                 model.HasError = true;
             }
-            return model; 
+            return model;
         }
+
+        #region Private
+        private static UserModel BindUserData(UserModel model, GrievanceUserDetail userDetail)
+        {
+            if (!string.Equals(userDetail, null))
+            {
+                model = new UserModel()
+                {
+                    UserId = userDetail.UserId,
+                    EmailAddress = userDetail.Email,
+                    FirstName = userDetail.FirstName,
+                    LastName = userDetail.LastName,
+                    EntityType = userDetail.EntityType,
+                    EnrollmentNumber = userDetail.EnrollmentNumber,
+                    ContactNumber = userDetail.ContactNo
+                };
+            }
+            return model;
+        }
+        #endregion
     }
 }

@@ -26,7 +26,7 @@ namespace GrievanceManagementSystem.Controllers
             {
                 if (!string.IsNullOrEmpty(registrationViewModel.EmailAddress) && !string.IsNullOrEmpty(registrationViewModel.Password))
                 {
-                    RegistrationModel model = new GrievanceUserDetailsBusinessLogic().Login(registrationViewModel.EmailAddress, registrationViewModel.Password);
+                    UserModel model = new GrievanceUserDetailsBusinessLogic().Login(registrationViewModel.EmailAddress, registrationViewModel.Password);
                     if (!model.HasError)
                     {
                         FormsAuthentication.SetAuthCookie(model.EmailAddress, false);
@@ -54,7 +54,7 @@ namespace GrievanceManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                RegistrationModel model = new RegistrationModel()
+                UserModel model = new UserModel()
                 {
                     FirstName = registrationViewModel.FirstName,
                     LastName = registrationViewModel.LastName,

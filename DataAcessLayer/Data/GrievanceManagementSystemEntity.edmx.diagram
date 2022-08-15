@@ -11,12 +11,13 @@
         <EntityTypeShape EntityType="GrievanceManagementSystemModel.GrievanceSendToMaster" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GrievanceManagementSystemModel.GrievanceStatusMaster" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="GrievanceManagementSystemModel.GrievanceTypeMaster" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="GrievanceManagementSystemModel.GrievanceMaster" Width="1.5" PointX="10.5" PointY="5.875" />
+        <EntityTypeShape EntityType="GrievanceManagementSystemModel.GrievanceUserDetail" Width="1.5" PointX="8.25" PointY="10.375" />
+        <EntityTypeShape EntityType="GrievanceManagementSystemModel.GrievanceMaster" Width="1.5" PointX="10.5" PointY="5.375" />
         <AssociationConnector Association="GrievanceManagementSystemModel.FK_GrievanceMaster_GrievanceDepartmentMaster" />
         <AssociationConnector Association="GrievanceManagementSystemModel.FK_GrievanceDetails_GrievanceMaster" />
         <AssociationConnector Association="GrievanceManagementSystemModel.FK_GrievanceMaster_GrievancePriorityMaster" />
+        <AssociationConnector Association="GrievanceManagementSystemModel.FK_GrievanceMaster_GrievanceSendToMaster" />
         <AssociationConnector Association="GrievanceManagementSystemModel.FK_GrievanceMaster_GrievanceTypeMaster" />
-        <EntityTypeShape EntityType="GrievanceManagementSystemModel.GrievanceUserDetail" Width="1.5" PointX="8.25" PointY="10.375" />
         <AssociationConnector Association="GrievanceManagementSystemModel.FK_GrievanceMaster_GrievanceUserDetails" />
         </Diagram>
     </edmx:Diagrams>
