@@ -6,7 +6,7 @@ namespace GrievanceManagementSystem.Controllers
     {
         public ActionResult Dashboard()
         {
-            if (IsAuthenticatedUser())
+            if (IsEmaployeeAuthenticatedUser())
             {
                 return View();
             }

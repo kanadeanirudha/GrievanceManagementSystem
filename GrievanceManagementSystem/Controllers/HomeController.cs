@@ -1,12 +1,11 @@
 ﻿using GMS.BusinessLogicLayer;
 using GMS.Model;
+using GMS.Model.Constant;
 
-using GrievanceManagementSystem.Helper;
 using GrievanceManagementSystem.ViewModels;
 
 using System.Web.Mvc;
 using System.Web.Security;
-using GMS.Model.Constant;
 
 namespace GrievanceManagementSystem.Controllers
 {
@@ -32,6 +31,10 @@ namespace GrievanceManagementSystem.Controllers
                     {
                         FormsAuthentication.SetAuthCookie(model.EmailAddress, false);
                         Session[Constant.UserSessionData] = model;
+                        if (model?.EntityType == "S")
+                        {
+                            return RedirectToAction("Dashboard", "Student");
+                        }
                         return RedirectToAction("Dashboard", "Dashboard");
                     }
                 }
