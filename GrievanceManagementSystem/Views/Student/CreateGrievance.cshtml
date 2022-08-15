@@ -7,7 +7,7 @@
 
 <div class="col-lg-12">
     <div class="card shadow-lg border-0 rounded-lg mt-5">
-        <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Grievance</h3></div>
+        <div class="card-header"><h4 class="text-center font-weight-light">Create Grievance</h4></div>
         <div class="card-body">
             @using (Html.BeginForm("CreateGrievance", "Student", FormMethod.Post))
             {
@@ -61,27 +61,21 @@
                         </div>
                     </div>
                     <div class="col-md-3">
+                        @*<div class="form-floating">
+                                @Html.DropDownListFor(m => m.StatusId, Model.StatusList, new { @class = "form-control", @readonly = "readonly" })
+                                <label for="DepartmentId">Status</label>
+                            </div>*@
                         <div class="form-floating">
-                            @Html.DropDownListFor(m => m.StatusId, Model.StatusList, new { @class = "form-control", @readonly = "readonly" })
-                            <label for="DepartmentId">Status</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-3">
-                        <div class="form-floating mb-3 mb-md-0">
                             @Html.DropDownListFor(m => m.GrievanceTypeId, Model.GrievanceTypeList, new { @class = "form-control" })
                             <label for="GrievanceTypeId">Grievance Type</label>
                             @Html.ValidationMessageFor(m => m.GrievanceTypeId, null, new { @class = "validation-error" })
                         </div>
                     </div>
-                    <div class="col-md-9">
-                        <div class="form-floating">
-                            @Html.TextBoxFor(m => m.Subject, new { @class = "form-control", @placeholder = "Enter subject", @maxLength = "200" })
-                            <label for="Subject">Subject</label>
-                            @Html.ValidationMessageFor(m => m.Subject, null, new { @class = "validation-error" })
-                        </div>
-                    </div>
+                </div>
+                <div class="form-floating">
+                    @Html.TextBoxFor(m => m.Subject, new { @class = "form-control", @placeholder = "Enter subject", @maxLength = "200" })
+                    <label for="Subject">Subject</label>
+                    @Html.ValidationMessageFor(m => m.Subject, null, new { @class = "validation-error" })
                 </div>
                 <div class="form-floating mb-3">
                     @Html.TextAreaFor(m => m.Details, new { @class = "form-control", @placeholder = "Enter description", @maxLength = "500", @style = "height:100px" })
@@ -94,6 +88,7 @@
                     </div>
                 </div>
                 @Html.HiddenFor(m => m.UserId)
+                @Html.HiddenFor(m => m.StatusId)
             }
         </div>
     </div>

@@ -6,6 +6,7 @@ using GMS.Model;
 using GMS.Model.Constant;
 using GrievanceManagementSystem.ViewModels;
 using GrievanceManagementSystem.Helper;
+using System.Linq;
 
 namespace GrievanceManagementSystem.Controllers
 {
@@ -56,6 +57,10 @@ namespace GrievanceManagementSystem.Controllers
                 if (ModelState.IsValid)
                 {
                     bool status = grievanceDetailsDataBusinessLogic.CreateGrievance(grievanceDetailsViewModel.ToModel<GrievanceDetailsModel>());
+                    if (status)
+                    {
+                        return RedirectToAction("GrievanceList", "Student");
+                    }
                 }
                 BindData(grievanceDetailsViewModel);
                 return View(grievanceDetailsViewModel);
@@ -99,22 +104,22 @@ namespace GrievanceManagementSystem.Controllers
                 });
             }
 
-            //Bind Status
-            List<SelectListItem> statusList = new List<SelectListItem>();
-            //statusList.Add(new SelectListItem()
+            ////Bind Status
+            //List<SelectListItem> statusList = new List<SelectListItem>();
+            ////statusList.Add(new SelectListItem()
+            ////{
+            ////    Text = "--Select--",
+            ////    Value = ""
+            ////});
+            //foreach (var item in grievanceMasterDataBusinessLogic?.GetGrievanceStatusList())
             //{
-            //    Text = "--Select--",
-            //    Value = ""
-            //});
-            foreach (var item in grievanceMasterDataBusinessLogic?.GetGrievanceStatusList())
-            {
-                statusList.Add(new SelectListItem()
-                {
-                    Text = item.StatusName,
-                    Value = Convert.ToString(item.StatusId),
-                    Selected = item.StatusCode == "O" ? true : false
-                });
-            }
+            //    statusList.Add(new SelectListItem()
+            //    {
+            //        Text = item.StatusName,
+            //        Value = Convert.ToString(item.StatusId),
+            //        Selected = item.StatusCode == "O" ? true : false
+            //    });
+            //}
 
             //Bind Status
             List<SelectListItem> priorityList = new List<SelectListItem>();
@@ -165,15 +170,11 @@ namespace GrievanceManagementSystem.Controllers
             }
 
             grievanceDetailsViewModel.DepartmentList = departmentList;
-            grievanceDetailsViewModel.StatusList = statusList;
+            grievanceDetailsViewModel.StatusId = grievanceMasterDataBusinessLogic.GetGrievanceStatusList().FirstOrDefault(x => x.StatusCode == "O").StatusId;
             grievanceDetailsViewModel.PriorityList = priorityList;
             grievanceDetailsViewModel.GrievanceTypeList = grievanceTypeList;
             grievanceDetailsViewModel.GrievanceSendToList = grievanceSendToListList;
             return grievanceDetailsViewModel;
         }
-
-
-
-
     }
 }
