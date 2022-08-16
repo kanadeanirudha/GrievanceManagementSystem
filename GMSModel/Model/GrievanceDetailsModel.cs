@@ -15,9 +15,14 @@ namespace GMS.Model
         public int UserId { get; set; }
         public Int16 StatusId { get; set; }
         public Int16 GrievanceTypeId { get; set; }
+        public string GrievanceTypeName { get; set; }
         public string Subject { get; set; }
         public Int16 PriorityId { get; set; }
+        public string PriorityName { get; set; }
         public Int16 DepartmentId { get; set; }
+        public string DepartmentName { get; set; }
+        public string GrievanceSendToName { get; set; }
+        public string StatusName { get; set; }
         public Int16 GrievanceSendToId { get; set; }
         public string AddCc { get; set; }
         public string Details { get; set; }

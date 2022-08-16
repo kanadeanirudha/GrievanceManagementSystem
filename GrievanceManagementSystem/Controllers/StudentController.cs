@@ -32,7 +32,9 @@ namespace GrievanceManagementSystem.Controllers
         {
             if (IsStudentAuthenticatedUser())
             {
-                return View();
+                UserModel userModel = Session[Constant.UserSessionData] as UserModel;
+                List<GrievanceDetailsModel> list = grievanceDetailsDataBusinessLogic.GetGrievanceList(userModel.UserId, 0);
+                return View(list);
             }
             return RedirectToAction("Login", "Home");
         }
@@ -170,7 +172,7 @@ namespace GrievanceManagementSystem.Controllers
             }
 
             grievanceDetailsViewModel.DepartmentList = departmentList;
-            grievanceDetailsViewModel.StatusId = grievanceMasterDataBusinessLogic.GetGrievanceStatusList().FirstOrDefault(x => x.StatusCode == "O").StatusId;
+            grievanceDetailsViewModel.StatusId = grievanceMasterDataBusinessLogic.GetGrievanceStatusList().FirstOrDefault(x => x.StatusCode == "S").StatusId;
             grievanceDetailsViewModel.PriorityList = priorityList;
             grievanceDetailsViewModel.GrievanceTypeList = grievanceTypeList;
             grievanceDetailsViewModel.GrievanceSendToList = grievanceSendToListList;
