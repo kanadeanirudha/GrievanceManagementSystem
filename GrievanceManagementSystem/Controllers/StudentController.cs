@@ -28,13 +28,18 @@ namespace GrievanceManagementSystem.Controllers
             return RedirectToAction("Login", "Home");
         }
 
-        public ActionResult GrievanceList()
+        public ActionResult GrievanceList(Int16 departmentId = 0)
         {
             if (IsStudentAuthenticatedUser())
             {
+                GrievanceDetailsListViewModel viewModel = new GrievanceDetailsListViewModel();
                 UserModel userModel = Session[Constant.UserSessionData] as UserModel;
-                List<GrievanceDetailsModel> list = grievanceDetailsDataBusinessLogic.GetGrievanceList(userModel.UserId, 0);
-                return View(list);
+                viewModel.GrievanceDetailsList = grievanceDetailsDataBusinessLogic.GetGrievanceList(userModel.UserId, departmentId);
+
+                //Bind departments
+                viewModel.DepartmentList = BindDepartments();
+
+                return View(viewModel);
             }
             return RedirectToAction("Login", "Home");
         }
@@ -89,72 +94,16 @@ namespace GrievanceManagementSystem.Controllers
             grievanceDetailsViewModel.EnrollmentNumber = userModel.EnrollmentNumber;
             grievanceDetailsViewModel.ContactNumber = userModel.ContactNumber;
 
-            //Bind departments
-            List<SelectListItem> departmentList = new List<SelectListItem>();
-            departmentList.Add(new SelectListItem()
-            {
-                Text = "--Select--",
-                Value = ""
-            });
+            grievanceDetailsViewModel.DepartmentList = BindDepartments();
+            grievanceDetailsViewModel.StatusId = grievanceMasterDataBusinessLogic.GetGrievanceStatusList().FirstOrDefault(x => x.StatusCode == "S").StatusId;
+            grievanceDetailsViewModel.PriorityList = BindPriority();
+            grievanceDetailsViewModel.GrievanceTypeList = BindGrievanceType();
+            grievanceDetailsViewModel.GrievanceSendToList = BindGrievanceSendToList();
+            return grievanceDetailsViewModel;
+        }
 
-            foreach (var item in grievanceMasterDataBusinessLogic?.GetGrievanceDepartmentList())
-            {
-                departmentList.Add(new SelectListItem()
-                {
-                    Text = item.DepartmentName,
-                    Value = Convert.ToString(item.DepartmentId)
-                });
-            }
-
-            ////Bind Status
-            //List<SelectListItem> statusList = new List<SelectListItem>();
-            ////statusList.Add(new SelectListItem()
-            ////{
-            ////    Text = "--Select--",
-            ////    Value = ""
-            ////});
-            //foreach (var item in grievanceMasterDataBusinessLogic?.GetGrievanceStatusList())
-            //{
-            //    statusList.Add(new SelectListItem()
-            //    {
-            //        Text = item.StatusName,
-            //        Value = Convert.ToString(item.StatusId),
-            //        Selected = item.StatusCode == "O" ? true : false
-            //    });
-            //}
-
-            //Bind Status
-            List<SelectListItem> priorityList = new List<SelectListItem>();
-            priorityList.Add(new SelectListItem()
-            {
-                Text = "--Select--",
-                Value = ""
-            });
-            foreach (var item in grievanceMasterDataBusinessLogic?.GetGrievancePriorityList())
-            {
-                priorityList.Add(new SelectListItem()
-                {
-                    Text = item.PriorityName,
-                    Value = Convert.ToString(item.PriorityId)
-                });
-            }
-
-            //Bind Grievance Type
-            List<SelectListItem> grievanceTypeList = new List<SelectListItem>();
-            grievanceTypeList.Add(new SelectListItem()
-            {
-                Text = "--Select--",
-                Value = ""
-            });
-            foreach (var item in grievanceMasterDataBusinessLogic?.GetGrievanceTypeList())
-            {
-                grievanceTypeList.Add(new SelectListItem()
-                {
-                    Text = item.GrievanceTypeName,
-                    Value = Convert.ToString(item.GrievanceTypeId)
-                });
-            }
-
+        private List<SelectListItem> BindGrievanceSendToList()
+        {
             //Bind Grievance Send To List
             List<SelectListItem> grievanceSendToListList = new List<SelectListItem>();
             grievanceSendToListList.Add(new SelectListItem()
@@ -171,12 +120,71 @@ namespace GrievanceManagementSystem.Controllers
                 });
             }
 
-            grievanceDetailsViewModel.DepartmentList = departmentList;
-            grievanceDetailsViewModel.StatusId = grievanceMasterDataBusinessLogic.GetGrievanceStatusList().FirstOrDefault(x => x.StatusCode == "S").StatusId;
-            grievanceDetailsViewModel.PriorityList = priorityList;
-            grievanceDetailsViewModel.GrievanceTypeList = grievanceTypeList;
-            grievanceDetailsViewModel.GrievanceSendToList = grievanceSendToListList;
-            return grievanceDetailsViewModel;
+            return grievanceSendToListList;
+        }
+
+        private List<SelectListItem> BindGrievanceType()
+        {
+            //Bind Grievance Type
+            List<SelectListItem> grievanceTypeList = new List<SelectListItem>();
+            grievanceTypeList.Add(new SelectListItem()
+            {
+                Text = "--Select--",
+                Value = ""
+            });
+            foreach (var item in grievanceMasterDataBusinessLogic?.GetGrievanceTypeList())
+            {
+                grievanceTypeList.Add(new SelectListItem()
+                {
+                    Text = item.GrievanceTypeName,
+                    Value = Convert.ToString(item.GrievanceTypeId)
+                });
+            }
+
+            return grievanceTypeList;
+        }
+
+        private List<SelectListItem> BindPriority()
+        {
+            //Bind priority
+            List<SelectListItem> priorityList = new List<SelectListItem>();
+            priorityList.Add(new SelectListItem()
+            {
+                Text = "--Select--",
+                Value = ""
+            });
+            foreach (var item in grievanceMasterDataBusinessLogic?.GetGrievancePriorityList())
+            {
+                priorityList.Add(new SelectListItem()
+                {
+                    Text = item.PriorityName,
+                    Value = Convert.ToString(item.PriorityId)
+                });
+            }
+
+            return priorityList;
+        }
+
+        //Bind Departments
+        private List<SelectListItem> BindDepartments()
+        {
+            List<SelectListItem> departmentList = new List<SelectListItem>();
+            departmentList.Add(new SelectListItem()
+            {
+                Text = "--Select--",
+                Value = ""
+            });
+
+            foreach (var item in grievanceMasterDataBusinessLogic?.GetGrievanceDepartmentList())
+            {
+                departmentList.Add(new SelectListItem()
+                {
+                    Text = item.DepartmentName,
+                    Value = Convert.ToString(item.DepartmentId)
+                });
+            }
+
+            return departmentList;
         }
     }
 }

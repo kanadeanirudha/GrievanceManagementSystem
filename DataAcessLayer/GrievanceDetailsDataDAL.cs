@@ -79,7 +79,8 @@ namespace GMS.DataAcessLayer
                                     join gd in db.GrievanceDepartmentMasters on gm.DepartmentId equals gd.DepartmentId
                                     join gst in db.GrievanceSendToMasters on gm.GrievanceSendToId equals gst.GrievanceSendToId
                                     join gsm in db.GrievanceStatusMasters on gm.StatusId equals gsm.StatusId
-                                    where (gm.UserId == userId) //&& (gm.DepartmentId == departmentId || gm.DepartmentId == 0)
+                                    where (gm.UserId == userId) && (gm.DepartmentId == departmentId || departmentId == 0)
+                                    orderby gm.CreatedDate descending
                                     select new
                                     {
                                         gm.GrievanceNumber,
