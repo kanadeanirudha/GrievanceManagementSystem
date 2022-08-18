@@ -131,6 +131,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -190,6 +191,7 @@
     <Content Include="Views\Student\Dashboard.cshtml" />
     <Content Include="Views\Student\GrievanceList.cshtml" />
     <Content Include="Views\Student\CreateGrievance.cshtml" />
+    <Content Include="Views\Employee\GrievanceList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

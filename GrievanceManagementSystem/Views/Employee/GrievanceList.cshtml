@@ -3,7 +3,7 @@
 @model GrievanceDetailsListViewModel
 @{
     ViewBag.Title = "Dashboard";
-    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container-fluid px-4">
@@ -16,7 +16,7 @@
             @*<i class="fas fa-table me-1"></i>*@
             <div class="row">
                 <div class="col-md-2">
-                  <span style="font-weight:bold">Department :</span>  
+                    <span style="font-weight:bold">Department :</span>
                 </div>
                 <div class="col-md-3">
                     @Html.DropDownListFor(m => m.DepartmentId, Model.DepartmentList, new { @class = "form-control" })
@@ -31,23 +31,23 @@
                 <thead>
                     <tr>
                         <th>Grievance Number</th>
+                        <th>Name</th>
                         <th>Grievance Type</th>
                         <th>Priority</th>
                         <th>Concern Department</th>
                         <th>Send To</th>
                         <th>Status</th>
-                        <th id="ActionColumnId">Action</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
                         <th>Grievance Number</th>
+                        <th>Name</th>
                         <th>Grievance Type</th>
                         <th>Priority</th>
                         <th>Concern Department</th>
                         <th>Send To</th>
                         <th>Status</th>
-                        <th id="ActionColumnId">Action</th>
                     </tr>
                 </tfoot>
                 <tbody>
@@ -56,13 +56,13 @@
                         foreach (var item in Model.GrievanceDetailsList)
                         {
                             <tr>
-                                <td style="font-weight:bold">@item.GrievanceNumber</td>
+                                <td style="font-weight:bold"><a href="/Employee/GetGrievanceDetail/@item.GrievanceId">@item.GrievanceNumber</a></td>
+                                <td>@item.FullName</td>
                                 <td>@item.GrievanceTypeName</td>
                                 <td>@item.PriorityName</td>
                                 <td>@item.DepartmentName</td>
                                 <td>@item.GrievanceSendToName</td>
                                 <td>@item.StatusName</td>
-                                <td><a href="#" title="View"><i class="fas fa-eye me-1"></i></a></td>
                             </tr>
                         }
                     }
@@ -76,7 +76,7 @@
     $(document).ready(function () {
         $('#searchId').click(function () {
             var departmentId = $("#DepartmentId").val();
-            window.location.href = "/Student/GrievanceList?departmentId=" + departmentId;
+            window.location.href = "/Employee/GrievanceList?departmentId=" + departmentId;
         })
     });
 </script>

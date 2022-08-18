@@ -31,11 +31,11 @@ namespace GrievanceManagementSystem.Controllers
                     {
                         FormsAuthentication.SetAuthCookie(model.EmailAddress, false);
                         Session[Constant.UserSessionData] = model;
-                        if (model?.EntityType == "S")
+                        if (model?.EntityType == "STUD")
                         {
-                            return RedirectToAction("Dashboard", "Student");
+                            return RedirectToAction("GrievanceList", "Student");
                         }
-                        return RedirectToAction("Dashboard", "Dashboard");
+                        return RedirectToAction("GrievanceList", "Employee");
                     }
                 }
             }

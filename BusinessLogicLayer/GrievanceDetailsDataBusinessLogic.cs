@@ -23,5 +23,11 @@ namespace GMS.BusinessLogicLayer
             List<GrievanceDetailsModel> list = new GrievanceDetailsDataDAL().GetGrievanceList(userId, departmentId);
             return list;
         }
+
+        public List<GrievanceDetailsModel> GetGrievanceListForEmployee(Int16 departmentId)
+        {
+            List<GrievanceDetailsModel> list = new GrievanceDetailsDataDAL().GetGrievanceListForEmployee(departmentId);
+            return list;
+        }
     }
 }

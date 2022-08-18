@@ -112,5 +112,93 @@ namespace GMS.DataAcessLayer
             }
             return list;
         }
+
+        public List<GrievanceDetailsModel> GetGrievanceListForEmployee(Int16 departmentId)
+        {
+            List<GrievanceDetailsModel> list = new List<GrievanceDetailsModel>();
+            try
+            {
+                using (db = new GrievanceManagementSystemEntities())
+                {
+                    var dataList = (from gm in db.GrievanceMasters
+                                    join gt in db.GrievanceTypeMasters on gm.GrievanceTypeId equals gt.GrievanceTypeId
+                                    join gp in db.GrievancePriorityMasters on gm.PriorityId equals gp.PriorityId
+                                    join gd in db.GrievanceDepartmentMasters on gm.DepartmentId equals gd.DepartmentId
+                                    join gst in db.GrievanceSendToMasters on gm.GrievanceSendToId equals gst.GrievanceSendToId
+                                    join gsm in db.GrievanceStatusMasters on gm.StatusId equals gsm.StatusId
+                                    join gud in db.GrievanceUserDetails on gm.UserId equals gud.UserId
+                                    where (gm.DepartmentId == departmentId || departmentId == 0)
+                                    orderby gm.CreatedDate descending
+                                    select new
+                                    {
+                                        gm.GrievanceId,
+                                        gm.GrievanceNumber,
+                                        gt.GrievanceTypeName,
+                                        gp.PriorityName,
+                                        gd.DepartmentName,
+                                        gst.GrievanceSendToName,
+                                        gsm.StatusName,
+                                        gud.FirstName,
+                                        gud.LastName,
+                                    }).ToList();
+                    if (dataList?.Count > 0)
+                    {
+                        foreach (var item in dataList)
+                        {
+                            list.Add(new GrievanceDetailsModel
+                            {
+                                GrievanceId = item.GrievanceId,
+                                GrievanceNumber = item.GrievanceNumber,
+                                GrievanceTypeName = item.GrievanceTypeName,
+                                PriorityName = item.PriorityName,
+                                DepartmentName = item.DepartmentName,
+                                GrievanceSendToName = item.GrievanceSendToName,
+                                StatusName = item.StatusName,
+                                FullName = item.FirstName + " " + item.LastName
+                            });
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            return list;
+        }
+
+        public GrievanceDetailsModel GetGrievanceDetailsForEmployee(long grievanceId)
+        {
+            GrievanceDetailsModel model = null;
+            try
+            {
+                using (db = new GrievanceManagementSystemEntities())
+                {
+                    model = (from gm in db.GrievanceMasters
+                             join gt in db.GrievanceTypeMasters on gm.GrievanceTypeId equals gt.GrievanceTypeId
+                             join gp in db.GrievancePriorityMasters on gm.PriorityId equals gp.PriorityId
+                             join gd in db.GrievanceDepartmentMasters on gm.DepartmentId equals gd.DepartmentId
+                             join gst in db.GrievanceSendToMasters on gm.GrievanceSendToId equals gst.GrievanceSendToId
+                             join gsm in db.GrievanceStatusMasters on gm.StatusId equals gsm.StatusId
+                             join gud in db.GrievanceUserDetails on gm.UserId equals gud.UserId
+                             where gm.GrievanceId == grievanceId
+                             orderby gm.CreatedDate descending
+                             select new GrievanceDetailsModel
+                             {
+                                 GrievanceId = gm.GrievanceId,
+                                 GrievanceNumber = gm.GrievanceNumber,
+                                 GrievanceTypeName = gt.GrievanceTypeName,
+                                 PriorityName = gp.PriorityName,
+                                 DepartmentName = gd.DepartmentName,
+                                 GrievanceSendToName = gst.GrievanceSendToName,
+                                 StatusName = gsm.StatusName,
+                                 FullName = gud.FirstName + " " + gud.LastName,
+                             }).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            return model;
+        }
     }
 }

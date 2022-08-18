@@ -6,7 +6,7 @@ namespace GMS.Model
 {
     public class GrievanceDetailsModel : BaseModel
     {
-        public int GrievanceId { get; set; }
+        public long GrievanceId { get; set; }
         public string GrievanceNumber { get; set; }
         public string FullName { get; set; }
         public string EnrollmentNumber { get; set; }
