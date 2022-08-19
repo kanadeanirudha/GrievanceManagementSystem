@@ -31,7 +31,7 @@ namespace GrievanceManagementSystem.Controllers
                     {
                         FormsAuthentication.SetAuthCookie(model.EmailAddress, false);
                         Session[Constant.UserSessionData] = model;
-                        if (model?.EntityType == "STUD")
+                        if (model?.EntityType == Constant.StudentEntityType)
                         {
                             return RedirectToAction("GrievanceList", "Student");
                         }
@@ -58,10 +58,18 @@ namespace GrievanceManagementSystem.Controllers
                 {
                     FirstName = registrationViewModel.FirstName,
                     LastName = registrationViewModel.LastName,
-                    EmailAddress = registrationViewModel.EmailAddress
+                    EmailAddress = registrationViewModel.EmailAddress,
+                    Password = registrationViewModel.Password,
+                    ContactNumber = registrationViewModel.ContactNumber,
+                    EnrollmentNumber = registrationViewModel.EnrollmentNumber,
+                    EntityType = Constant.StudentEntityType,
                 };
 
                 bool status = new GrievanceUserDetailsBusinessLogic().UserRegistration(model);
+                if (status)
+                {
+                    return RedirectToAction("Login", "Home");
+                }
             }
             return View(registrationViewModel);
         }

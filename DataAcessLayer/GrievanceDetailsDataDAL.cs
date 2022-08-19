@@ -80,10 +80,10 @@ namespace GMS.DataAcessLayer
                         grievanceMaster = db.GrievanceMasters.FirstOrDefault(x => x.GrievanceId == model.GrievanceId);
                         grievanceMaster.PriorityId = model.PriorityId;
                         grievanceMaster.StatusId = model.StatusId;
-                        grievanceMaster.PriorityId = model.PriorityId;
                         grievanceMaster.ModifiedBy = model.UserId;
                         grievanceMaster.ModifiedDate = date;
                         db.GrievanceMasters.Add(grievanceMaster);
+                        db.Entry(grievanceMaster).State = System.Data.Entity.EntityState.Modified;
                         db.SaveChanges();
                     }
 

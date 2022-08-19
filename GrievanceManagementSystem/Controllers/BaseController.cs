@@ -9,12 +9,12 @@ namespace GrievanceManagementSystem.Controllers
     {
         protected bool IsEmaployeeAuthenticatedUser()
         {
-            return User.Identity.IsAuthenticated && ((Session[Constant.UserSessionData] as UserModel)?.EntityType == "E" || (Session[Constant.UserSessionData] as UserModel)?.EntityType == "SA");
+            return User.Identity.IsAuthenticated && ((Session[Constant.UserSessionData] as UserModel)?.EntityType == Constant.EmployeeEntityType || (Session[Constant.UserSessionData] as UserModel)?.EntityType == "SA");
         }
 
         protected bool IsStudentAuthenticatedUser()
         {
-            return User.Identity.IsAuthenticated && (Session[Constant.UserSessionData] as UserModel)?.EntityType == "STUD";
+            return User.Identity.IsAuthenticated && (Session[Constant.UserSessionData] as UserModel)?.EntityType == Constant.StudentEntityType;
         }
 
 

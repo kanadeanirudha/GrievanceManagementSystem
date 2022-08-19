@@ -1,0 +1,15 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/BusinessLogicLayer/bin/Debug
+/BusinessLogicLayer/obj/Debug
+/DataAcessLayer/bin/Debug
+/DataAcessLayer/obj/Debug
+/GMSModel/bin/Debug
+/GMSModel/obj/Debug
+/GrievanceManagementSystem/.vs
+/GrievanceManagementSystem/bin
+/GrievanceManagementSystem/obj
+/packages

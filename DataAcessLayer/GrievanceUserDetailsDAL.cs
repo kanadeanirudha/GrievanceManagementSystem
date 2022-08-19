@@ -24,9 +24,20 @@ namespace GMS.DataAcessLayer
                 {
                     using (db = new GrievanceManagementSystemEntities())
                     {
+                        DateTime date = DateTime.Now;
                         var userDetails = new GrievanceUserDetail()
                         {
-                            Email = model.EmailAddress
+                            FirstName = model.FirstName,
+                            LastName = model.LastName,
+                            Email = model.EmailAddress,
+                            Password = model.Password,
+                            ContactNo = model.ContactNumber,
+                            EnrollmentNumber = model.EnrollmentNumber,
+                            EntityType = model.EntityType,
+                            CreatedBy = model.UserId,
+                            CreatedDate = date,
+                            ModifiedBy = model.UserId,
+                            ModifiedDate = date
                         };
                         db.GrievanceUserDetails.Add(userDetails);
                         db.SaveChanges();

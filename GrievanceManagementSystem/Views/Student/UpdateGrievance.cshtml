@@ -2,7 +2,7 @@
 @model GrievanceDetailsViewModel
 @{
     ViewBag.Title = "Update Grievance";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
 }
 
 <div class="col-lg-12">
@@ -127,24 +127,24 @@
                 </div>
             </div>
 
-            @using (Html.BeginForm("UpdateGrievance", "Employee", FormMethod.Post))
+            @using (Html.BeginForm("UpdateGrievance", "Student", FormMethod.Post))
             {
-                <div class="row mb-3">
-                    <div class="col-md-3">
-                        <div class="form-floating mb-3 mb-md-0">
-                            @Html.DropDownListFor(m => m.PriorityId, Model.PriorityList, new { @class = "form-control" })
-                            <label for="DepartmentId">Update Priority</label>
-                            @Html.ValidationMessageFor(m => m.PriorityId, null, new { @class = "validation-error" })
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-floating">
-                            @Html.DropDownListFor(m => m.StatusId, Model.StatusList, new { @class = "form-control" })
-                            <label for="GrievanceTypeId">Update Status</label>
-                            @Html.ValidationMessageFor(m => m.StatusId, null, new { @class = "validation-error" })
-                        </div>
+                @*<div class="row mb-3">
+                <div class="col-md-3">
+                    <div class="form-floating mb-3 mb-md-0">
+                        @Html.DropDownListFor(m => m.PriorityId, Model.PriorityList, new { @class = "form-control" })
+                        <label for="DepartmentId">Update Priority</label>
+                        @Html.ValidationMessageFor(m => m.PriorityId, null, new { @class = "validation-error" })
                     </div>
                 </div>
+                <div class="col-md-3">
+                    <div class="form-floating">
+                        @Html.DropDownListFor(m => m.StatusId, Model.StatusList, new { @class = "form-control" })
+                        <label for="GrievanceTypeId">Update Status</label>
+                        @Html.ValidationMessageFor(m => m.StatusId, null, new { @class = "validation-error" })
+                    </div>
+                </div>
+            </div>*@
 
                 <div class="form-floating mb-3">
                     @Html.TextAreaFor(m => m.Details, new { @class = "form-control", @placeholder = "Enter your Reply", @maxLength = "500", @style = "height:100px" })
@@ -157,6 +157,8 @@
                         <button type="submit" class="btn btn-primary btn-block" id="responsegrievance" data-test-selector="btnSubmit">Submit</button>
                     </div>
                 </div>
+                @Html.HiddenFor(m => m.PriorityId)
+                @Html.HiddenFor(m => m.StatusId)
                 @Html.HiddenFor(m => m.UserId)
                 @Html.HiddenFor(m => m.GrievanceId)
             }

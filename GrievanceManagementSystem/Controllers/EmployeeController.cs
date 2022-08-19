@@ -75,6 +75,36 @@ namespace GrievanceManagementSystem.Controllers
             return RedirectToAction("Login", "Home");
         }
 
+        [HttpGet]
+        public ActionResult Registor()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Registor(RegistrationViewModel registrationViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                UserModel model = new UserModel()
+                {
+                    FirstName = registrationViewModel.FirstName,
+                    LastName = registrationViewModel.LastName,
+                    EmailAddress = registrationViewModel.EmailAddress,
+                    Password = registrationViewModel.Password,
+                    ContactNumber = registrationViewModel.ContactNumber,
+                    EnrollmentNumber = registrationViewModel.EnrollmentNumber,
+                    EntityType = Constant.EmployeeEntityType,
+                };
+
+                bool status = new GrievanceUserDetailsBusinessLogic().UserRegistration(model);
+                if (status)
+                {
+                    return RedirectToAction("GrievanceList", "Employee");
+                }
+            }
+            return View(registrationViewModel);
+        }
         #region Private
 
         private GrievanceDetailsViewModel BindData(long grievanceId, short statusId, short priorityId)
