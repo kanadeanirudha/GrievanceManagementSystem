@@ -78,30 +78,36 @@ namespace GMS.DataAcessLayer
                     using (db = new GrievanceManagementSystemEntities())
                     {
                         grievanceMaster = db.GrievanceMasters.FirstOrDefault(x => x.GrievanceId == model.GrievanceId);
-                        grievanceMaster.PriorityId = model.PriorityId;
-                        grievanceMaster.StatusId = model.StatusId;
-                        grievanceMaster.ModifiedBy = model.UserId;
-                        grievanceMaster.ModifiedDate = date;
-                        db.GrievanceMasters.Add(grievanceMaster);
-                        db.Entry(grievanceMaster).State = System.Data.Entity.EntityState.Modified;
-                        db.SaveChanges();
+                        if (grievanceMaster != null)
+                        {
+                            grievanceMaster.PriorityId = model.PriorityId;
+                            grievanceMaster.StatusId = model.StatusId;
+                            grievanceMaster.ModifiedBy = model.UserId;
+                            grievanceMaster.ModifiedDate = date;
+                            db.GrievanceMasters.Add(grievanceMaster);
+                            db.Entry(grievanceMaster).State = System.Data.Entity.EntityState.Modified;
+                            db.SaveChanges();
+                        }
                     }
 
-                    GrievanceDetail grievanceDetails = new GrievanceDetail()
+                    if (grievanceMaster != null)
                     {
-                        GrievanceId = grievanceMaster.GrievanceId,
-                        Details = model.Details,
-                        CreatedBy = model.UserId,
-                        CreatedDate = date,
-                        ModifiedBy = model.UserId,
-                        ModifiedDate = date
-                    };
+                        GrievanceDetail grievanceDetails = new GrievanceDetail()
+                        {
+                            GrievanceId = grievanceMaster.GrievanceId,
+                            Details = model.Details,
+                            CreatedBy = model.UserId,
+                            CreatedDate = date,
+                            ModifiedBy = model.UserId,
+                            ModifiedDate = date
+                        };
 
-                    using (db = new GrievanceManagementSystemEntities())
-                    {
-                        db.GrievanceDetails.Add(grievanceDetails);
-                        db.SaveChanges();
-                        status = true;
+                        using (db = new GrievanceManagementSystemEntities())
+                        {
+                            db.GrievanceDetails.Add(grievanceDetails);
+                            db.SaveChanges();
+                            status = true;
+                        }
                     }
                 }
             }
