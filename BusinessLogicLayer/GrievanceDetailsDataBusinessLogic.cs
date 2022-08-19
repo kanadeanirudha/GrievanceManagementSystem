@@ -18,6 +18,12 @@ namespace GMS.BusinessLogicLayer
             return status;
         }
 
+        public bool UpdateGrievance(GrievanceDetailsModel model)
+        {
+            bool status = new GrievanceDetailsDataDAL().UpdateGrievance(model);
+            return status;
+        }
+
         public List<GrievanceDetailsModel> GetGrievanceList(int userId, Int16 departmentId)
         {
             List<GrievanceDetailsModel> list = new GrievanceDetailsDataDAL().GetGrievanceList(userId, departmentId);
@@ -28,6 +34,12 @@ namespace GMS.BusinessLogicLayer
         {
             List<GrievanceDetailsModel> list = new GrievanceDetailsDataDAL().GetGrievanceListForEmployee(departmentId);
             return list;
+        }
+
+        public GrievanceDetailsModel GetGrievanceDetails(long grievanceId, int userId)
+        {
+            GrievanceDetailsModel grievanceDetailsModel = new GrievanceDetailsDataDAL().GetGrievanceDetails(grievanceId, userId);
+            return grievanceDetailsModel;
         }
     }
 }

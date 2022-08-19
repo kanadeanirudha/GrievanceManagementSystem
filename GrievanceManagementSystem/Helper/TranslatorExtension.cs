@@ -1,4 +1,5 @@
 ﻿using GMS.Helper;
+using GMS.Model;
 using GrievanceManagementSystem.ViewModels;
 using System.Collections.Generic;
 
@@ -6,33 +7,33 @@ namespace GrievanceManagementSystem.Helper
 {
     public static class TranslatorExtension
     {
-        ///// <summary>
-        ///// Translate Model to ViewModel
-        ///// </summary>
-        ///// <typeparam name="TDTOModel">Translate Model to ViewModel</typeparam>
-        ///// <param name="modelBase">APIBaseModel is extended class</param>
-        ///// <returns></returns>
-        //public static TDTOModel ToViewModel<TDTOModel>(this BaseModel modelBase)
-        //    => Translator.Translate<TDTOModel>(modelBase);
+        /// <summary>
+        /// Translate Model to ViewModel
+        /// </summary>
+        /// <typeparam name="TDTOModel">Translate Model to ViewModel</typeparam>
+        /// <param name="modelBase">APIBaseModel is extended class</param>
+        /// <returns></returns>
+        public static TDTOModel ToViewModel<TDTOModel>(this BaseModel modelBase)
+            => Translator.Translate<TDTOModel>(modelBase);
 
-        ///// <summary>
-        ///// Translate Model to ViewModel
-        ///// </summary>
-        ///// <typeparam name="TDTOModel">TDTOModel is a destination model, having contraint TDTOModel is a BaseModel</typeparam>
-        ///// <typeparam name="TModel">TModel is source model</typeparam>
-        ///// <param name="Model">model is extended class</param>
-        ///// <returns></returns>
-        //public static TDTOModel ToViewModel<TDTOModel, TModel>(this TModel model) where TDTOModel : BaseModel
-        //    => Translator.Translate<TDTOModel, TModel>(model);
+        /// <summary>
+        /// Translate Model to ViewModel
+        /// </summary>
+        /// <typeparam name="TDTOModel">TDTOModel is a destination model, having contraint TDTOModel is a BaseModel</typeparam>
+        /// <typeparam name="TModel">TModel is source model</typeparam>
+        /// <param name="Model">model is extended class</param>
+        /// <returns></returns>
+        public static TDTOModel ToViewModel<TDTOModel, TModel>(this TModel model) where TDTOModel : BaseModel
+            => Translator.Translate<TDTOModel, TModel>(model);
 
-        ///// <summary>
-        ///// Translate Model collection to View Model
-        ///// </summary>
-        ///// <typeparam name="TDTOModel">TDTOModel is a destination model</typeparam>
-        ///// <param name="collection">collection is extended APIBaseModel class list</param>
-        ///// <returns></returns>
-        //public static IEnumerable<TDTOModel> ToViewModel<TDTOModel>(this IEnumerable<BaseModel> collection)
-        //    => Translator.Translate<TDTOModel>(collection);
+        /// <summary>
+        /// Translate Model collection to View Model
+        /// </summary>
+        /// <typeparam name="TDTOModel">TDTOModel is a destination model</typeparam>
+        /// <param name="collection">collection is extended APIBaseModel class list</param>
+        /// <returns></returns>
+        public static IEnumerable<TDTOModel> ToViewModel<TDTOModel>(this IEnumerable<BaseModel> collection)
+            => Translator.Translate<TDTOModel>(collection);
 
         /// <summary>
         /// Translate Model collection to View Model

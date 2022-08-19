@@ -1,7 +1,4 @@
-﻿using GMS.Model;
-
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
@@ -17,17 +14,22 @@ namespace GrievanceManagementSystem.ViewModels
         public string EmailAddress { get; set; }
         public int UserId { get; set; }
         [Required]
-        public Int16 StatusId { get; set; }
+        public short StatusId { get; set; }
+        public string StatusName { get; set; }
         [Required]
-        public Int16 GrievanceTypeId { get; set; }
+        public short GrievanceTypeId { get; set; }
+        public string GrievanceTypeName { get; set; }
         [Required]
         public string Subject { get; set; }
         [Required]
-        public Int16 PriorityId { get; set; }
+        public short PriorityId { get; set; }
+        public string PriorityName { get; set; }
         [Required]
-        public Int16 DepartmentId { get; set; }
+        public short DepartmentId { get; set; }
+        public string DepartmentName { get; set; }
         [Required]
-        public Int16 GrievanceSendToId { get; set; }
+        public short GrievanceSendToId { get; set; }
+        public string GrievanceSendToName { get; set; }
         public string AddCc { get; set; }
         [Required]
         public string Details { get; set; }
@@ -36,5 +38,6 @@ namespace GrievanceManagementSystem.ViewModels
         public List<SelectListItem> StatusList { get; set; }
         public List<SelectListItem> GrievanceTypeList { get; set; }
         public List<SelectListItem> GrievanceSendToList { get; set; }
+        public List<string> DetailList { get; set; }
     }
 }

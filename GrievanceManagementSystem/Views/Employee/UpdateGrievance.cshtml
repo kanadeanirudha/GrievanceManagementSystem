@@ -1,0 +1,166 @@
+﻿@using GrievanceManagementSystem.ViewModels
+@model GrievanceDetailsViewModel
+@{
+    ViewBag.Title = "Update Grievance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-lg-12">
+    <div class="card shadow-lg border-0 rounded-lg mt-5">
+        <div class="card-header"><h4 class="text-center font-weight-light">Grievance Details: @Html.DisplayFor(m => m.GrievanceNumber)</h4></div>
+        <div class="card-body">
+
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <div class="form-floating mb-3 mb-md-0">
+                        <span style="font-weight:bold">Name : </span>
+                        <br />
+                        <span>@Html.DisplayFor(m => m.FullName)</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-floating mb-3 mb-md-0">
+                        <span style="font-weight:bold">Enrollment Number : </span>
+                        <br />
+                        <span>@Html.DisplayFor(m => m.EnrollmentNumber)</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-floating mb-3 mb-md-0">
+                        <span style="font-weight:bold">Contact Number : </span>
+                        <br />
+                        <span>@Html.DisplayFor(m => m.ContactNumber)</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-floating mb-3 mb-md-0">
+                        <span style="font-weight:bold">Email Address : </span>
+                        <br />
+                        <span>@Html.DisplayFor(m => m.EmailAddress)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <div class="form-floating mb-3 mb-md-0">
+                        <span style="font-weight:bold">Grievance Type : </span>
+                        <br />
+                        <span>@Html.DisplayFor(m => m.GrievanceTypeName)</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-floating mb-3 mb-md-0">
+                        <span style="font-weight:bold">Priority : </span>
+                        <br />
+                        <span>@Html.DisplayFor(m => m.PriorityName)</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-floating mb-3 mb-md-0">
+                        <span style="font-weight:bold">Current Status : </span>
+                        <br />
+                        <span>@Html.DisplayFor(m => m.StatusName)</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-floating mb-3 mb-md-0">
+                        <span style="font-weight:bold">Concern Department : </span>
+                        <br />
+                        <span>@Html.DisplayFor(m => m.DepartmentName)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <div class="form-floating mb-3 mb-md-0">
+                        <span style="font-weight:bold">Grievance Send To : </span>
+                        <br />
+                        <span>@Html.DisplayFor(m => m.GrievanceSendToName)</span>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="form-floating mb-3 mb-md-0">
+                        <span style="font-weight:bold">Subject : </span>
+                        <br />
+                        <span>@Html.DisplayFor(m => m.Subject)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <span style="font-weight:bold">Posted List :</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="datatablesSimple">
+                        <thead>
+                            <tr>
+                                <th>Details</th>
+                                <th>Posted By</th>
+                                <th>Posted Date</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Details</th>
+                                <th>Posted By</th>
+                                <th>Posted Date</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @foreach (var item in Model.DetailList)
+                            {
+                                <tr>
+                                    <td>@item.Split('~')[0]</td>
+                                    <td>@item.Split('~')[1]</td>
+                                    <td>@item.Split('~')[2]</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            @using (Html.BeginForm("UpdateGrievance", "Employee", FormMethod.Post))
+            {
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <div class="form-floating mb-3 mb-md-0">
+                            @Html.DropDownListFor(m => m.PriorityId, Model.PriorityList, new { @class = "form-control" })
+                            <label for="DepartmentId">Update Priority</label>
+                            @Html.ValidationMessageFor(m => m.PriorityId, null, new { @class = "validation-error" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-floating">
+                            @Html.DropDownListFor(m => m.StatusId, Model.StatusList, new { @class = "form-control" })
+                            <label for="GrievanceTypeId">Update Status</label>
+                            @Html.ValidationMessageFor(m => m.StatusId, null, new { @class = "validation-error" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    @Html.TextAreaFor(m => m.Details, new { @class = "form-control", @placeholder = "Enter your Reply", @maxLength = "500", @style = "height:100px" })
+                    <label for="Details">Reply</label>
+                    @Html.ValidationMessageFor(m => m.Details, null, new { @class = "validation-error" })
+                </div>
+
+                <div class="mt-4 mb-0">
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-block" id="responsegrievance" data-test-selector="btnSubmit">Submit</button>
+                    </div>
+                </div>
+                @Html.HiddenFor(m => m.UserId)
+                @Html.HiddenFor(m => m.GrievanceId)
+            }
+        </div>
+    </div>
+</div>
+

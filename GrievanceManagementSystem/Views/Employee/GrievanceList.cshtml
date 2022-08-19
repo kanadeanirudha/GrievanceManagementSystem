@@ -1,5 +1,4 @@
-﻿@using GMS.Model
-@using GrievanceManagementSystem.ViewModels
+﻿@using GrievanceManagementSystem.ViewModels
 @model GrievanceDetailsListViewModel
 @{
     ViewBag.Title = "Dashboard";
@@ -56,7 +55,7 @@
                         foreach (var item in Model.GrievanceDetailsList)
                         {
                             <tr>
-                                <td style="font-weight:bold"><a href="/Employee/GetGrievanceDetail/@item.GrievanceId">@item.GrievanceNumber</a></td>
+                                <td style="font-weight:bold"><a href="/Employee/UpdateGrievance?grievanceId=@item.GrievanceId">@item.GrievanceNumber</a></td>
                                 <td>@item.FullName</td>
                                 <td>@item.GrievanceTypeName</td>
                                 <td>@item.PriorityName</td>
